@@ -1,0 +1,21 @@
+export const tabs = [
+    { key: 'self', name: '原皮', types: []  },
+    { key: 'my', name: '伴生', types: []  },
+    { key: 'brave', name: '勇者', types: []  },
+    { key: 'epic', name: '史诗', types: []  },
+    { key: 'rare', name: '传说', types: []  },
+    { key: 'limit', name: '限定', types: []  },
+    { key: 'season', name: '赛季', types: []  },
+    { key: 'anniversary', name: '周年', types: []  },
+    { key: 'newYear', name: '新年', types: []  },
+    { key: 'festival', name: '节日', types: []  },
+    { key: 'warOrder', name: '战令', types: []  },
+    { key: 'linkage', name: '联动', types: []  },
+    { key: 'match', name: '赛事', types: []  },
+    { key: 'vip', name: '贵族', types: []  },
+    { key: 'activity', name: '活动', types: []  },
+    { key: 'growUp', name: '成长', types: []  },
+    { key: 'six', name: '六元', types: []  },
+    { key: 'lovers', name: '恋人', types: []  },
+    { key: 'series', name: '系列', types: []  }
+]

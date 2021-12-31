@@ -1,0 +1,60 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+                "backgroundColor":"#f9c",
+                "enablePullDownRefresh": true,
+                "backgroundTextStyle": "light"
+			}
+		},
+        {
+        	"path": "pages/skin/index",
+        	"style": {
+        		"navigationBarTitleText": "skin"
+        	}
+        },
+        {
+        	"path": "pages/form/index",
+        	"style": {
+        		"navigationBarTitleText": "form"
+        	}
+        }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "index"
+            },
+            {
+                "pagePath": "pages/skin/index",
+                "text": "skin"
+            },
+            {
+                "pagePath": "pages/form/index",
+                "text": "form"
+            }
+        ]
+    },
+    "condition": { //模式配置，仅开发期间生效
+        "current": 0, //当前激活的模式（list 的索引项）
+        "list": [
+            {
+                "name": "skin", //模式名称
+                "path": "pages/skin/index" //启动页面，必选
+            }
+        ]
+    }
+}

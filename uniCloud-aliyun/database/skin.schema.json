@@ -1,0 +1,44 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+    "required": ["name", "logo", "icons", "type", "quality"],
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+        "name": {
+            "bsonType":"string",
+            "description":"名称"
+        },
+        "logo": {
+            "bsonType":"string",
+            "description":"logo"
+        },
+        "number": {
+            "bsonType":"string",
+            "description":"编号"
+        },
+        "type": {
+            "bsonType":"string",
+            "description":"皮肤类型"
+        },
+        "quality": {
+            "bsonType":"string",
+            "description":"皮肤品质"
+        },
+        "content": {
+            "bsonType":"string",
+            "description":"内容"
+        },
+        "position": {
+            "bsonType":"string",
+            "description":"英雄位置"
+        }
+	}
+}
