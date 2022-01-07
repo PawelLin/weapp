@@ -7,7 +7,7 @@
 		"update": true,
 		"delete": true
 	},
-    "required": ["name", "logo", "icons", "type", "quality"],
+    "required": ["name", "logo", "number", "order", "type", "quality"],
 	"properties": {
 		"_id": {
 			"description": "ID，系统自动生成"
@@ -23,6 +23,10 @@
         "number": {
             "bsonType":"string",
             "description":"编号"
+        },
+        "order": {
+            "bsonType":"string",
+            "description":"序号"
         },
         "type": {
             "bsonType":"string",
