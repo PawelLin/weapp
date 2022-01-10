@@ -16,6 +16,12 @@
         	}
         },
         {
+        	"path": "pages/list/index",
+        	"style": {
+        		"navigationBarTitleText": "list"
+        	}
+        },
+        {
         	"path": "pages/form/index",
         	"style": {
         		"navigationBarTitleText": "form"
@@ -37,6 +43,10 @@
             {
                 "pagePath": "pages/index/index",
                 "text": "index"
+            },
+            {
+                "pagePath": "pages/list/index",
+                "text": "list"
             },
             {
                 "pagePath": "pages/skin/index",

@@ -41,6 +41,7 @@
                 <view class="label required">内容</view>
                 <textarea v-model="form.content" class="item" placeholder="请输入"></textarea>
             </view>
+            <button @click="submit" type="default">提交</button>
             <view class="form-item">
                 <view class="label required">类型</view>
                 <radio-group @change="typeChange" name="type" class="item">
@@ -52,7 +53,6 @@
                     <view @click="uploadImg('type')" class="image-add">新增</view>
                 </radio-group>
             </view>
-            <button @click="submit" type="default">提交</button>
         </form>
     </view>
 </template>
@@ -107,6 +107,8 @@ const uploadImg = type => {
     uni.chooseImage({ count: 1 }).then(async res => {
         if (res.tempFilePaths.length) {
             const cloudPath = res.tempFiles[0].name
+            form.number = cloudPath.replace(/(.*)-.*-.*/, '$1')
+            form.order = cloudPath.replace(/.*-.*-(\d*).*/, '$1')
             const filePath = res.tempFilePaths[0]
             const checkResult = await uniCloud.callFunction({
                 name: 'image',

@@ -1,79 +1,81 @@
 <template>
     <view class="skin">
-        <view v-for="(items, index) in data" class="list" :key="index">
-            <view v-if="!index" class="item">
-                <view class="logo"></view>
-                <view class="name">名称</view>
-                <view class="number">编号</view>
-                <view class="type">类型</view>
-                <view class="quality">品质</view>
-                <view class="position">位置</view>
+        <scroll-view scroll-y="true" class="tabs">
+            <view v-for="item in tabs" @click="setActive(item.key)" class="tabs-item" :key="item.key">
+                <text :class="item.key === active ? 'active' : null">{{item.name}}</text>
             </view>
-            <view v-for="item in items" class="item" :key="item.number + item.order">
-                <image class="logo" :src="item.logo" mode="widthFix"></image>
-                <view class="name">{{item.name}}</view>
-                <view class="number">{{item.number}}-{{item.order}}</view>
-                <view class="type">{{item.type}}</view>
-                <view class="quality">{{item.quality}}</view>
-                <view class="position">{{item.position}}</view>
+        </scroll-view>
+        <scroll-view v-if="datas" class="contain" :scroll-into-view="active" scroll-y>
+            <view v-for="({ types, key }) in tabs" class="list" :key="key" :id="key">
+                <view v-for="({ data, type }, index) in types" :key="index">
+                    <view class="images">
+                        <image v-for="src in data" :src="datas[src].logo" class="image" mode="" :key="src"></image>
+                    </view>
+                    <image v-if="type" src="" class="type" mode=""></image>
+                </view>
             </view>
-        </view>
+        </scroll-view>
     </view>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { onReady } from '@dcloudio/uni-app'
 import { QUALITY, POSITION } from '../../utils/enums.js'
+import { tabs } from './enums.js'
 
 const QUALITY_OBJ = QUALITY.reduce((item, { key, value }) => (item[key] = value) && item || item, {})
 const POSITION_OBJ = POSITION.reduce((item, { key, value }) => (item[key] = value) && item || item, {})
-const data = ref([])
-uniCloud.callFunction({
-    name: 'skin'
-}).then(res => {
-    const result = res.result.data
-    const _data = []
-    const _dataIndex = []
-    result.forEach(item => {
-        const name = item.name.split('-')[0]
-        const index = _dataIndex.indexOf(name)
-        item.position = POSITION_OBJ[item.position]
-        item.quality = item.quality + QUALITY_OBJ[item.quality]
-        if (index > -1) {
-            _data[index].push(item)
-        } else {
-            _dataIndex.push(name)
-            _data.push([item])
-        }
-    })
-    data.value = _data
+const datas = ref(null)
+onReady(() => {
+    uniCloud.callFunction({
+        name: 'skin'
+    }).then(res => {
+        const result = res.result.data
+        const _datas = {}
+        result.forEach(item => {
+            _datas[`${item.number}${item.order}`] = item
+        })
+        datas.value = _datas
+    })    
 })
+const active = ref('self')
+const setActive = key => {
+    active.value = key
+}
 </script>
 
 <style lang="scss">
+page {
+    height: 100%;
+}
 .skin {
-    .list + .list {
-        margin-top: 20rpx;
+    display: flex;
+    height: 100%;
+    .tabs {
+        width: 80px;
+        color: #666666;
+        text-align: center;
+        &-item {
+            padding: 8px 10px;
+            .active {
+                border: 1px solid #666666;
+                border-radius: 5px;
+            }
+        }
     }
-    .item {
-        display: flex;
-        align-items: center;
-    }
-    .name {
-        margin-left: 20rpx;
-        min-width: 260rpx;
-    }
-    .number {
-        min-width: 130rpx;
-    }
-    .type {
-        min-width: 70rpx;
-    }
-    .quality {
-        min-width: 90rpx;
-    }
-    .logo {
-        width: 80rpx;
+    .contain {
+        flex: 1;
+        .list {
+            padding-top: 5px;
+            min-height: 100%;
+            box-sizing: border-box;
+        }
+        .image {
+            margin: 5px 5px 0 0;
+            width: 40px;
+            height: 40px;
+        }
     }
 }
 </style>
